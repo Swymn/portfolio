@@ -1,26 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to my <code>portfolio</code> !
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { AppRouter } from "./router/AppRouter";
+
+/**
+ * This component is the root of the application.
+ * 
+ * @returns {JSX.Element} The root component.
+ */
+export const App = (): JSX.Element => {
+    return (
+        <AppRouter />
+    )
 }
-
-export default App;
