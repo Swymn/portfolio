@@ -33,16 +33,15 @@ export const Header = (): JSX.Element => {
         setCurrentPath(location.pathname);
     }, [location]);
 
-    console.log("isMobileMenuOpen: ", isMobileMenuOpen);
-
-
     return (
-        <header className="flex flex-row items-center justify-between py-6 bg-blue">
+        <header className="flex flex-row items-center justify-between py-6 bg-blue overflow-hidden">
+            {/* Site name section */}
             <Link to={AppRoute.Home} className="flex flex-row items-center justify-center gap-x-1.5 min-w-[205px] px-10">
                 <h1 className="font-semibold text-2xl">Ugo</h1>
                 <h1 className="font-thin text-2xl">Venture</h1>
             </Link>
 
+            {/* Navbar section (hidden in mobile view) */}
             <nav className="hidden lg:block min-w-[340px]">
                 <ul className="flex flex-row items-center justify-between px-4">
                     {links.map((link, index) => (
@@ -53,6 +52,7 @@ export const Header = (): JSX.Element => {
                 </ul>
             </nav>
 
+            {/* Social section (hidden in mobile view) */}
             <div className="hidden lg:flex flex-row items-center justify-between min-w-[476px] px-12">
                 <a href="https://www.linkedin.com/in/ugo-venture-099174227/" target="_blank" rel="noreferrer" className="flex flex-row justify-center items-center">
                     <svg className="w-6 h-6 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -75,10 +75,39 @@ export const Header = (): JSX.Element => {
                 </Link>
             </div>
 
+            {/* Menu icon (only visible in mobile view) */}
             <div className="flex lg:hidden justify-center items-center w-12 h-12 rounded-full mr-10 bg-white">
                 <svg onClick={() => setIsMobileMenuOpen((prevState) => !(prevState))} className="w-6 h-6 fill-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
                 </svg>
+            </div>
+
+            {/* Mobile nav menu */}
+            <div className={`absolute ${isMobileMenuOpen ? "left-0 w-full" : "left-full w-0"} top-0 transition-all duration-500 overflow-hidden`}>
+                <div className={`min-h-[100vh] bg-blue`}>
+                    <div className="flex justify-end mt-6 mr-10">
+                        <div className="flex justify-center items-center w-12 h-12 rounded-full bg-white">
+                            <svg onClick={() => setIsMobileMenuOpen((prevState) => !(prevState))} className="w-6 h-6 fill-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-y-8 my-12">
+                        {links.map((link, index) => (
+                            <Link
+                                key={index}
+                                to={link.path}
+                                onClick={() => { setCurrentPath(link.path); setIsMobileMenuOpen(false) }}
+                                className={`${currentPath === link.path ? 'text-rose' : 'text-white'} transition-colors duration-500`}
+                            >
+                                {currentPath === link.path ? `< ${link.name} />` : link.name}
+                            </Link>
+                        ))}
+                    </div>
+
+                </div>
+
             </div>
         </header>
     )
