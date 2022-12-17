@@ -33,14 +33,12 @@ export const Header = (): JSX.Element => {
         {
             name: 'LinkedIn',
             path: 'https://www.linkedin.com/in/ugo-venture-099174227/',
-            icon:
-                <img src="/img/svg/linkedin-in.svg" alt="LinkedIn logo" className="mx-3" />
+            icon: 'linkedin-in'
         },
         {
             name: 'GitHub',
             path: 'https://github.com/Swymn',
-            icon:
-                <img src="/img/svg/github.svg" alt="LinkedIn logo" className="mx-3" />
+            icon: 'github'
         }
     ];
 
@@ -83,7 +81,7 @@ export const Header = (): JSX.Element => {
             <div className="hidden lg:flex flex-row items-center justify-between min-w-[476px] px-12">
                 {socialLinks.map((social, index) => (
                     <a key={index} href={social.path} target="_blank" rel="noreferrer" className="flex flex-row justify-center items-center">
-                        {social.icon}
+                        <img src={`/img/svg/${social.icon}.svg`} alt={`${social.name} logo`} className="mx-3"/>
                         <p className="font-thin">{social.name}</p>
                     </a>
                 ))}

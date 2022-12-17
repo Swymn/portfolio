@@ -10,6 +10,7 @@ module.exports = {
                 'mauve': '#974063',
                 'rose': '#f54768',
                 'orange': '#ff9677',
+                'white': '#D0D0D0',
             }
         },
 	},

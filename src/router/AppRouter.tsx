@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Header } from "../components/header/Header";
+import { Footer } from "../components/footer/Footer";
 
 import "./app-router.scss";
 
@@ -19,11 +20,14 @@ export const AppRouter = (): JSX.Element => {
     return (
         <Router>
             <Header />
-            <Routes>
-                <Route path={AppRoute.Home} element={<div>Home</div>} />
-                <Route path={AppRoute.NotFound} element={<div>404</div>} />
-                <Route path="*" element={<div>404</div>} />
-            </Routes>
+            <main>
+                <Routes>
+                    <Route path={AppRoute.Home} element={<div>Home</div>} />
+                    <Route path={AppRoute.NotFound} element={<div>404</div>} />
+                    <Route path="*" element={<div>404</div>} />
+                </Routes>
+            </main>
+            <Footer />
         </Router>
     )
 }
