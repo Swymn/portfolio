@@ -7,6 +7,7 @@ import "./app-router.scss";
 
 export enum AppRoute {
     Home = "/",
+    NotFound = "/404"
 }
 
 /**
@@ -20,6 +21,7 @@ export const AppRouter = (): JSX.Element => {
             <Header />
             <Routes>
                 <Route path={AppRoute.Home} element={<div>Home</div>} />
+                <Route path={AppRoute.NotFound} element={<div>404</div>} />
                 <Route path="*" element={<div>404</div>} />
             </Routes>
         </Router>

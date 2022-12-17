@@ -2,25 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: "Moon-2.0";
-    src: url("../../public/fonts/Moon2.0-Regular.otf") format("woff2");
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: "Moon-2.0";
-    src: url("../../public/fonts/Moon2.0-Bold.otf") format("woff2");
-    font-weight: bolder;
-}
-
-@font-face {
-    font-family: "Moon-2.0";
-    src: url("../../public/fonts/Moon2.0-Light.otf") format("woff2");
-    font-weight: lighter;
-}
-
 * {
-    font-family: "Moon-2.0";
-    font-weight: bolder;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+}
+
+svg {
+    fill: #fff;
 }
