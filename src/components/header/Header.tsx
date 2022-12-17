@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AppRoute } from '../../router/AppRouter';
 
 /**
@@ -11,7 +11,9 @@ import { AppRoute } from '../../router/AppRouter';
  */
 export const Header = (): JSX.Element => {
 
-    const [currentPath, setCurrentPath] = useState<string>(window.location.pathname);
+    const location = useLocation();
+    const [currentPath, setCurrentPath] = useState<string>(location.pathname);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
     const links = [
         {
             name: 'Services',
@@ -28,16 +30,11 @@ export const Header = (): JSX.Element => {
     ];
 
     useEffect(() => {
-        const handleLocationChange = () => {
-            setCurrentPath(window.location.pathname);
-        }
+        setCurrentPath(location.pathname);
+    }, [location]);
 
-        window.addEventListener('popstate', handleLocationChange);
+    console.log("isMobileMenuOpen: ", isMobileMenuOpen);
 
-        return () => {
-            window.removeEventListener('popstate', handleLocationChange);
-        }
-    }, [currentPath]);
 
     return (
         <header className="flex flex-row items-center justify-between py-6 bg-blue">
@@ -46,17 +43,17 @@ export const Header = (): JSX.Element => {
                 <h1 className="font-thin text-2xl">Venture</h1>
             </Link>
 
-            <nav className="min-w-[340px]">
+            <nav className="hidden lg:block min-w-[340px]">
                 <ul className="flex flex-row items-center justify-between px-4">
                     {links.map((link, index) => (
                         <li key={index}>
-                            <Link to={link.path} className={currentPath === link.path ? 'text-rose font-semibold' : 'text-white'}>{currentPath === link.path ? `< ${link.name} />` : link.name}</Link>
+                            <Link onClick={() => setCurrentPath(link.path)} to={link.path} className={`${currentPath === link.path ? 'text-rose' : 'text-white'} transition-colors duration-500`}>{currentPath === link.path ? `< ${link.name} />` : link.name}</Link>
                         </li>
                     ))}
                 </ul>
             </nav>
 
-            <div className="flex flex-row items-center justify-between min-w-[476px] px-12">
+            <div className="hidden lg:flex flex-row items-center justify-between min-w-[476px] px-12">
                 <a href="https://www.linkedin.com/in/ugo-venture-099174227/" target="_blank" rel="noreferrer" className="flex flex-row justify-center items-center">
                     <svg className="w-6 h-6 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
@@ -76,6 +73,12 @@ export const Header = (): JSX.Element => {
                         <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
                     </svg>
                 </Link>
+            </div>
+
+            <div className="flex lg:hidden justify-center items-center w-12 h-12 rounded-full mr-10 bg-white">
+                <svg onClick={() => setIsMobileMenuOpen((prevState) => !(prevState))} className="w-6 h-6 fill-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                </svg>
             </div>
         </header>
     )
