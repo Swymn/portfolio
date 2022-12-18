@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppRoute } from "../../router/AppRouter";
+import { AppRoute } from "@Router/AppRouter";
 
 /**
  * Footer component

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AppRoute } from '../../router/AppRouter';
+import { AppRoute } from '@Router/AppRouter';
 
 /**
  * Header component
