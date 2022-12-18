@@ -12,9 +12,15 @@ body {
 }
 
 main {
-    min-height: 68vh;
+    min-height: calc(100vh - 96px - 180px);
 }
 
 svg {
     fill: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+    main {
+        min-height: calc(100vh - 96px - 284px);
+    }
 }

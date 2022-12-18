@@ -1,0 +1,13 @@
+.blink {
+    animation: blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+	from,
+    to {
+		visibility: hidden;
+	}
+	50% {
+		visibility: visible;
+	}
+}

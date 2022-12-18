@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "@Components/header/Header";
 import { Footer } from "@Components/footer/Footer";
 
+import { HomePage } from "@Pages/HomePage";
+
 import "./app-router.scss";
 
 export enum AppRoute {
@@ -22,7 +24,7 @@ export const AppRouter = (): JSX.Element => {
             <Header />
             <main>
                 <Routes>
-                    <Route path={AppRoute.Home} element={<div>Home</div>} />
+                    <Route path={AppRoute.Home} element={<HomePage />} />
                     <Route path={AppRoute.NotFound} element={<div>404</div>} />
                     <Route path="*" element={<div>404</div>} />
                 </Routes>
