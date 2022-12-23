@@ -22,44 +22,57 @@ interface TypeWritterProps {
  */
 export const TypeWritter: React.FC<TypeWritterProps> = ({ text, className }): JSX.Element => {
     
-    const [currentText, setCurrentText] = useState<string>("");
-    const [currentTextIndex, setCurrentTextIndex] = useState<number>(0);
-    const [currentCharacterIndex, setCurrentCharacterIndex] = useState<number>(0);
-    const [isRenderEntirely, setIsRenderEntirely] = useState<boolean>(false);
+    const [currentWord, setCurrentWord] = useState<string>('');
+    const [wordIndex, setWordIndex] = useState<number>(0);
+    const [isFinished, setIsFinished] = useState<boolean>(false);
 
     useEffect(() => {
-        if (currentCharacterIndex === 0 && isRenderEntirely) {
-            setTimeout(() => {
-                setCurrentTextIndex((currentTextIndex + 1) % text.length);
-                setCurrentCharacterIndex(0);
-                setIsRenderEntirely(false);
-            }, 5000);
-        } else {
-            if (currentCharacterIndex === text[currentTextIndex].length) {
-                setTimeout(() => {
-                    setIsRenderEntirely(true);
-                }, 2000);
-            }
+        let interval: NodeJS.Timer;
+        let timeout: NodeJS.Timer;
 
-            if (isRenderEntirely) {
-                setTimeout(() => {
-                    setCurrentCharacterIndex(currentCharacterIndex - 1);
-                }, 100);
+        const toggleWriting = () => {
+            setIsFinished(true);
+            clearTimeout(timeout);
+        }
+
+        const typeWriter = () => {
+            if (wordIndex === text.length) {
+                clearInterval(interval);
             } else {
-                setTimeout(() => {
-                    setCurrentCharacterIndex(currentCharacterIndex + 1);
-                }, 100);
+                setCurrentWord((prevState) => {
+                    let word;
+
+                    if (!isFinished) {
+                        word = prevState + (text[wordIndex][currentWord.length] ?? '');
+                    } else {
+                        word = prevState.slice(0, -1);
+                    }
+
+                    if (word.length === text[wordIndex].length) {
+                        timeout = setTimeout(toggleWriting, 1000);
+                    }
+                    if (word.length === 0) {
+                        setIsFinished(false);
+                        setWordIndex((prevIndexState) => (prevIndexState + 1) % text.length);
+                        setCurrentWord('');
+                    }
+
+                    return word;
+                });
             }
         }
-    }, [currentCharacterIndex, currentTextIndex, text, isRenderEntirely]);
 
-    useEffect(() => {
-        setCurrentText(text[currentTextIndex].substring(0, currentCharacterIndex));
-    }, [currentCharacterIndex, currentTextIndex, text]);
+        interval = setInterval(typeWriter, 50);
+
+        return () => {
+            clearInterval(interval);
+            clearTimeout(timeout);
+        }
+    }, [currentWord, wordIndex, isFinished, text]);
 
     return (
         <div className={className}>
-            <h1 className="text-5xl font-bold">{currentText}<span className="text-orange blink">|</span></h1>
+            <h1 className="text-5xl font-bold">{currentWord}<span className="text-orange blink">|</span></h1>
         </div>
     );
 };
