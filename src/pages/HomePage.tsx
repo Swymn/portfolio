@@ -5,12 +5,10 @@ import { TypeWritter } from '@Components/type-writter/TypeWritter';
 const sentence = [
     "Let's do amazing things together.",
     "I'm a full-stack developer.",
-    "I'm a software engineer.",
-    "I'm a web developer.",
-    "I'm a programmer.",
-    "I'm a computer scientist.",
-    "I'm a software developer.",
-    "I'm a software architect.",
+    "I'm a java developer.",
+    "I'm a typescript developer.",
+    "I'm a react developer.",
+    "I'm a javascript developer.",
 ]
 
 /**
@@ -40,11 +38,17 @@ export const HomePage: React.FC = (): JSX.Element => {
     return (
         <div className="flex flex-col gap-y-10">
 
-            <div>
-                <h1 className="text-5xl font-bold">Hi, I'm <span className="text-orange">Ugo</span>.</h1>
+            <div className="flex flex-col lg:flex-row items-center justify-between mx-2 my-8">
+                <div className="text-left h-64 md:h-32 lg:h-fit w-full lg:w-fit">
+                    <h1 className="text-5xl font-bold">Hi, I'm <span className="text-orange">Ugo</span>.</h1>
+                    <TypeWritter text={shuffle(sentence)} />
+                </div>
+
+                <div className="w-64 h-64 lg:mr-[10vw]">
+                    <img src="/img/profile-picture.jpg" alt="Profile" className="w-full h-full rounded-full object-cover" />
+                </div>
             </div>
             
-            <TypeWritter text={shuffle(sentence)}/>
         </div>
     );
 };
