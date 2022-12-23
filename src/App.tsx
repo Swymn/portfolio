@@ -7,7 +7,7 @@ import { AppRouter } from "@Router/AppRouter";
  * 
  * @returns {JSX.Element} The root component.
  */
-export const App = (): JSX.Element => {
+export const App: React.FC = (): JSX.Element => {
     return (
         <AppRouter />
     )

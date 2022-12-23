@@ -18,7 +18,7 @@ export enum AppRoute {
  * 
  * @returns {JSX.Element} The rooter component.
  */
-export const AppRouter = (): JSX.Element => {
+export const AppRouter: React.FC = (): JSX.Element => {
     return (
         <Router>
             <Header />

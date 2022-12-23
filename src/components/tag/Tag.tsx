@@ -1,3 +1,9 @@
+/**
+ * @typedef {Object} TagProps
+ * @property {string} text - Tag text
+ * @property {string?} color - Tag color
+ */
+
 import React from "react";
 
 interface TagProps {
@@ -5,17 +11,14 @@ interface TagProps {
     color?: string;
 }
 
-
 /**
  * Tag component, used to display a tag
  * 
  * @name Tag
  * 
- * @param {TagProps} props - Tag component props
- * 
  * @returns {JSX.Element} - Tag component
  */
-export const Tag = ({text, color}: TagProps): JSX.Element => {
+export const Tag: React.FC<TagProps> = ({text, color}): JSX.Element => {
 
     const tagColor = color ?? "#ff9677";    
 

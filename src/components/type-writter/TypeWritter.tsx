@@ -1,3 +1,9 @@
+/**
+ * @typedef {Object} TypeWritterProps
+ * @property {string[]} text - Text to display
+ * @property {string?} className - TypeWritter class name
+ */
+
 import React, { useEffect, useState } from "react";
 
 import "./type-writter.scss";
@@ -12,17 +18,14 @@ interface TypeWritterProps {
  * 
  * @name TypeWritter
  * 
- * @param {TypeWritterProps} props - TypeWritter component props
- * 
  * @returns {JSX.Element} - TypeWritter component
- * 
  */
-export const TypeWritter = ({ text, className }: TypeWritterProps): JSX.Element => {
+export const TypeWritter: React.FC<TypeWritterProps> = ({ text, className }): JSX.Element => {
     
-    const [currentText, setCurrentText] = useState("");
-    const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    const [currentCharacterIndex, setCurrentCharacterIndex] = useState(0);
-    const [isRenderEntirely, setIsRenderEntirely] = useState(false);
+    const [currentText, setCurrentText] = useState<string>("");
+    const [currentTextIndex, setCurrentTextIndex] = useState<number>(0);
+    const [currentCharacterIndex, setCurrentCharacterIndex] = useState<number>(0);
+    const [isRenderEntirely, setIsRenderEntirely] = useState<boolean>(false);
 
     useEffect(() => {
         if (currentCharacterIndex === 0 && isRenderEntirely) {

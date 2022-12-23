@@ -20,7 +20,7 @@ const sentence = [
  * 
  * @returns {JSX.Element} - Home page component
  */
-export const HomePage = (): JSX.Element => {
+export const HomePage: React.FC = (): JSX.Element => {
 
     // This method is used to shuffle the sentence array
     const shuffle = (array: string[]) => {

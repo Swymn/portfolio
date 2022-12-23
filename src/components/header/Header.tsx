@@ -9,7 +9,7 @@ import { AppRoute } from '@Router/AppRouter';
  * 
  * @returns {JSX.Element} Header component
  */
-export const Header = (): JSX.Element => {
+export const Header: React.FC = (): JSX.Element => {
 
     const location = useLocation();
     const [currentPath, setCurrentPath] = useState<string>(location.pathname);

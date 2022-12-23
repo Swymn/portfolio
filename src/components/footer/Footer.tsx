@@ -9,7 +9,7 @@ import { AppRoute } from "@Router/AppRouter";
  * 
  * @returns {JSX.Element} Footer component
  */
-export const Footer = (): JSX.Element => {
+export const Footer: React.FC = (): JSX.Element => {
 
     const links = [
         {
